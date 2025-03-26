@@ -69,17 +69,17 @@ class StockManagerTest {
         assertFalse(failure);
     }
 
-    @Test
-    void updateShoeDetails() {
-        Stock updatedShoe = new Stock(1, 1, 3, 3, 50);
-        boolean success = stockManager.updateShoeDetails(updatedShoe);
-        assertTrue(success);
-        
-        Stock retrievedShoe = stockManager.getShoeById(1);
-        assertEquals(3, retrievedShoe.getSize_id());
-        assertEquals(3, retrievedShoe.getColor_id());
-        assertEquals(50, retrievedShoe.getStock());
-    }
+//    @Test
+//    void updateShoeDetails() {
+//        Stock updatedShoe = new Stock(1, 1, 3, 3, 50);
+//        boolean success = stockManager.updateShoeDetails(updatedShoe);
+//        assertTrue(success);
+//
+//        Stock retrievedShoe = stockManager.getShoeById(1);
+//        assertEquals(3, retrievedShoe.getSize_id());
+//        assertEquals(3, retrievedShoe.getColor_id());
+//        assertEquals(50, retrievedShoe.getStock());
+//    }
 
     @Test
     void removeShoe() {

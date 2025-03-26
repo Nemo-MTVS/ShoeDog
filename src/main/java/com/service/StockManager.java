@@ -38,18 +38,18 @@ public class StockManager {
         }
         return false;
     }
-
-    public boolean updateShoeDetails(Stock updatedStock) {
-        Stock existingStock = getShoeById(updatedStock.getShoe_id());
-        if (existingStock != null) {
-            existingStock.setModel_id(updatedStock.getModel_id());
-            existingStock.setSize_id(updatedStock.getSize_id());
-            existingStock.setColor_id(updatedStock.getColor_id());
-            existingStock.setStock(updatedStock.getStock());
-            return true;
-        }
-        return false;
-    }
+//
+//    public boolean updateShoeDetails(Stock updatedStock) {
+//        Stock existingStock = getShoeById(updatedStock.getShoe_id());
+//        if (existingStock != null) {
+//            existingStock.setModel_id(updatedStock.getModel_id());
+//            existingStock.setSize_id(updatedStock.getSize_id());
+//            existingStock.setColor_id(updatedStock.getColor_id());
+//            existingStock.setStock(updatedStock.getStock());
+//            return true;
+//        }
+//        return false;
+//    }
 
     public boolean removeShoe(int shoeId) {
         return totalStock.removeIf(stock -> stock.getShoe_id() == shoeId);
