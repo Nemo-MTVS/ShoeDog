@@ -1,0 +1,46 @@
+Table stock {
+  shoe_id integer [primary key, increment] 
+  model_id varchar(255) [not null]
+  size integer [not null]
+  color integer [not null]
+  stock integer [not null, default: 0]
+}
+
+Table model {
+  id integer [primary key, increment] 
+  brands varchar(255) [not null]
+  listprice integer [not null]
+  desc varchar(255) [not null]
+}
+
+Table model_colors_links {
+  model_id integer [not null]
+  color_id integer [not null]
+}
+
+Table brands {
+  id integer [primary key, increment]
+  brandname varchar(255) [not null, unique]
+}
+
+Table color {
+  id integer [primary key, increment]
+  color varchar(255) [not null, unique]
+}
+
+Table sizes {
+  id integer [primary key, increment]
+  size integer [not null, unique]
+}
+
+Ref: "brands"."id" < "model"."brands"
+
+Ref: "model"."id" < "stock"."model_id"
+
+Ref: "sizes"."id" < "stock"."size"
+
+Ref: "color"."id" < "stock"."color"
+
+Ref: "model"."id" < "model_colors_links"."model_id"
+
+Ref: "color"."id" < "model_colors_links"."color_id"
