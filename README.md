@@ -1,8 +1,10 @@
-# ShoeDog - Shoe Inventory Management System
+# 👟 ShoeDog - Shoe Inventory Management System
+
+![ShoeDog System Overview](readmeImage.png)
 
 A Java-based backend system for managing shoe inventory, including brands, models, sizes, colors, and stock levels.
 
-## Project Overview
+## 🎯 Project Overview
 
 ShoeDog is designed to handle the complete inventory management system for a shoe store, providing functionality for:
 - Brand management
@@ -11,43 +13,43 @@ ShoeDog is designed to handle the complete inventory management system for a sho
 - Stock level monitoring
 - Model-Color relationship management
 
-## Features
+## ✨ Features
 
-### Brand Management
+### 🏢 Brand Management
 - Add, update, and remove shoe brands
 - Search brands by ID or name
 - List all available brands
 
-### Stock Management
+### 📦 Stock Management
 - Track individual shoe inventory
 - Update stock levels
 - Query stock by model, size, or color
 - Monitor stock across different locations
 
-### Size Management
+### 📏 Size Management
 - Predefined size ranges (220-300)
 - Size validation
 - Size range queries
 - Size availability checking
 
-### Color Management
+### 🎨 Color Management
 - Add, update, and remove colors
 - Search colors by ID or name
 - Case-insensitive color name search
 
-### Model-Color Link Management
+### 🔗 Model-Color Link Management
 - Link shoe models with available colors
 - Bulk color assignment to models
 - Query models by color and vice versa
 - Update and remove model-color relationships
 
-## Technical Stack
+## 🛠️ Technical Stack
 
 - Java
 - JUnit 5 for testing
 - Gradle for build management
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 src/
@@ -75,7 +77,7 @@ src/
         └── StockManagerTest.java
 ```
 
-## Database Structure
+## 💾 Database Structure
 
 The system is designed with the following database tables:
 - Brands
@@ -85,23 +87,23 @@ The system is designed with the following database tables:
 - ModelColorLink
 - Stock
 
-## Getting Started
+## 🚀 Getting Started
 
-### Prerequisites
+### 📋 Prerequisites
 - Java JDK 11 or higher
 - Gradle
 
-### Building the Project
+### 🏗️ Building the Project
 ```bash
 ./gradlew build
 ```
 
-### Running Tests
+### 🧪 Running Tests
 ```bash
 ./gradlew test
 ```
 
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -109,6 +111,6 @@ The system is designed with the following database tables:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details. 
