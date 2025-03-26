@@ -1,17 +1,14 @@
 # 👟 ShoeDog - Shoe Inventory Management System
 
-![ShoeDog System Overview](readmeImage.png)
-
-A Java-based backend system for managing shoe inventory, including brands, models, sizes, colors, and stock levels.
+A Java-based console application for managing shoe inventory, including brands, models, sizes, colors, and stock levels.
 
 ## 🎯 Project Overview
 
-ShoeDog is designed to handle the complete inventory management system for a shoe store, providing functionality for:
+ShoeDog is a console-based inventory management system for a shoe store, providing functionality for:
 - Brand management
 - Shoe model tracking
 - Size and color management
 - Stock level monitoring
-- Model-Color relationship management
 
 ## ✨ Features
 
@@ -24,7 +21,6 @@ ShoeDog is designed to handle the complete inventory management system for a sho
 - Track individual shoe inventory
 - Update stock levels
 - Query stock by model, size, or color
-- Monitor stock across different locations
 
 ### 📏 Size Management
 - Predefined size ranges (220-300)
@@ -36,12 +32,6 @@ ShoeDog is designed to handle the complete inventory management system for a sho
 - Add, update, and remove colors
 - Search colors by ID or name
 - Case-insensitive color name search
-
-### 🔗 Model-Color Link Management
-- Link shoe models with available colors
-- Bulk color assignment to models
-- Query models by color and vice versa
-- Update and remove model-color relationships
 
 ## 🛠️ Technical Stack
 
@@ -55,37 +45,29 @@ ShoeDog is designed to handle the complete inventory management system for a sho
 src/
 ├── main/java/com/
 │   ├── model/           # Data models
-│   │   ├── Brands.java
 │   │   ├── Colors.java
-│   │   ├── ModelColorLink.java
-│   │   ├── ShoeModel.java
+│   │   ├── Model.java
 │   │   ├── Sizes.java
 │   │   └── Stock.java
 │   ├── service/         # Business logic
-│   │   ├── BrandManager.java
 │   │   ├── ColorManager.java
-│   │   ├── ModelColorLinkManager.java
 │   │   ├── SizeManager.java
 │   │   └── StockManager.java
 │   └── Application.java
 └── test/java/com/       # Test classes
     └── service/
-        ├── BrandManagerTest.java
         ├── ColorManagerTest.java
-        ├── ModelColorLinkManagerTest.java
         ├── SizeManagerTest.java
         └── StockManagerTest.java
 ```
 
 ## 💾 Database Structure
 
-The system is designed with the following database tables:
-- Brands
-- ShoeModels
-- Sizes
-- Colors
-- ModelColorLink
-- Stock
+The system uses the following database tables:
+- model (id, modelname, brandname, listprice, description)
+- color (id, color)
+- sizes (id, size)
+- stock (shoe_id, model_id, color, size, stock)
 
 ## 🚀 Getting Started
 
@@ -98,7 +80,22 @@ The system is designed with the following database tables:
 ./gradlew build
 ```
 
-### 🧪 Running Tests
+### 🏃‍♂️ Running the Application
+```bash
+./gradlew run
+```
+
+## 📝 Usage
+
+The application runs in the console and provides a menu-driven interface for:
+1. Managing shoe models and brands
+2. Tracking inventory levels
+3. Managing available sizes and colors
+4. Querying stock information
+
+## 🧪 Testing
+
+Run the test suite:
 ```bash
 ./gradlew test
 ```

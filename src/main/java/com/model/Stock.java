@@ -3,15 +3,15 @@ package com.model;
 public class Stock {
     private int shoe_id;
     private int model_id;
-    private int size_id;
-    private int color_id;
+    private int color;
+    private int size;
     private int stock;
 
-    public Stock(int shoe_id, int model_id, int size_id, int color_id, int stock) {
+    public Stock(int shoe_id, int model_id, int color, int size, int stock) {
         this.shoe_id = shoe_id;
         this.model_id = model_id;
-        this.size_id = size_id;
-        this.color_id = color_id;
+        this.color = color;
+        this.size = size;
         this.stock = stock;
     }
 
@@ -31,20 +31,20 @@ public class Stock {
         this.model_id = model_id;
     }
 
-    public int getSize_id() {
-        return size_id;
+    public int getColor() {
+        return color;
     }
 
-    public void setSize_id(int size_id) {
-        this.size_id = size_id;
+    public void setColor(int color) {
+        this.color = color;
     }
 
-    public int getColor_id() {
-        return color_id;
+    public int getSize() {
+        return size;
     }
 
-    public void setColor_id(int color_id) {
-        this.color_id = color_id;
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public int getStock() {
@@ -57,12 +57,12 @@ public class Stock {
 
     @Override
     public String toString() {
-        return "Shoe"
-                + "shoe_id=" + shoe_id + '\''
-                + ", model_id=" + model_id + '\''
-                + ", size_id=" + size_id + '\''
-                + ", color_id=" + color_id + '\''
-                + ", stock=" + stock + '\''
-                + "}";
+        return "Stock{" +
+                "shoe_id=" + shoe_id +
+                ", model_id=" + model_id +
+                ", color=" + color +
+                ", size=" + size +
+                ", stock=" + stock +
+                '}';
     }
 }
