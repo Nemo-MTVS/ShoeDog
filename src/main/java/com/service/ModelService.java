@@ -32,6 +32,49 @@ public class ModelService {
 
         return modelDao.getAllModels();
     }
+    // ID로 특정 모델 조회
+    public Model getModelById(int modelId) throws SQLException {
+        Model model = modelDao.getModelById(modelId);
+
+        if (model == null) {
+            throw new IllegalArgumentException("해당 ID의 모델을 찾을 수 없습니다.");
+        }
+        return model;
+    }
+
+    // 모델 이름으로 특정 모델 조회
+    public Model getModelByName(String modelname) throws SQLException {
+        Model model = modelDao.getModelByName(modelname);
+
+        if (model == null) {
+            throw new IllegalArgumentException("해당 모델명의 모델을 찾을 수 없습니다.");
+        }
+        return model;
+    }
+
+    // 모델 등록
+    public boolean addModel(Model model) throws SQLException {
+        // 중복 검사
+        List<Model> existingModels = getAllModels();
+        for (Model m : existingModels) {
+            if (m.getModelname().equals(model.getModelname())) {
+                throw new IllegalArgumentException("이미 존재하는 모델입니다.");
+            }
+        }
+        return modelDao.addModel(model);
+    }
+
+    // 모델 수정
+    public boolean updateModel(Model model) throws SQLException {
+
+        boolean result = modelDao.updateModel(model);
+        if (!result) {
+            throw new SQLException("수정하는 과정에서 오류가 발생되었습니다.");
+        }
+
+        // 3️⃣ 업데이트 수행
+        return result;
+    }
 
 
 }
