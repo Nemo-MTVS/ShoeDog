@@ -1,26 +1,22 @@
 package com.service;
 
 import com.dao.ColorsDao;
-import com.dao.ShoeModelDao;
 import com.model.Colors;
-import com.model.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class ColorManager {
+public class ColorService {
 
-    private static final Logger log = LoggerFactory.getLogger(ModelManager.class);
+    private static final Logger log = LoggerFactory.getLogger(ModelService.class);
     private final ColorsDao colorsDao;
     private final Connection connection;
 
     // 생성자
-    public ColorManager(Connection connection) {
+    public ColorService(Connection connection) {
         this.connection = connection;
         this.colorsDao = new ColorsDao(connection);
     }

@@ -2,13 +2,13 @@ package com.service;
 
 import com.model.Sizes;
 
-public class SizeManager {
+public class SizeService {
     private final Sizes[] sizes;
     private static final int BASE_SIZE = 220;
     private static final int INCREMENT = 10;
     private static final int SIZE_COUNT = 9;  // 220 to 300 with 10-unit increments
 
-    public SizeManager() {
+    public SizeService() {
         sizes = new Sizes[SIZE_COUNT];
         for (int i = 0; i < SIZE_COUNT; i++) {
             // Size = 220 + i*10

@@ -1,21 +1,20 @@
 package com.view;
 
 import com.model.Colors;
-import com.service.ColorManager;
+import com.service.ColorService;
 
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
 public class ColorsView {
-    private final ColorManager colorManager;
+    private final ColorService colorService;
     private final Scanner scanner;
 
     // 생성자
     public ColorsView(Connection connection) {
-        this.colorManager = new ColorManager(connection);
+        this.colorService = new ColorService(connection);
         this.scanner = new Scanner(System.in);
     }
 
@@ -51,7 +50,7 @@ public class ColorsView {
     // 전체 색상 조회
     private void getAllColors() {
         try {
-            List<Colors> colors = colorManager.getAllColors();
+            List<Colors> colors = colorService.getAllColors();
 
             if (colors.isEmpty()) {
                 System.out.println("등록된 색상이 없습니다.");
@@ -71,7 +70,7 @@ public class ColorsView {
         scanner.nextLine(); // 개행 문자 처리
 
         try {
-            Colors color = colorManager.getColorById(colorId);
+            Colors color = colorService.getColorById(colorId);
             System.out.println("\n===== 색상 정보 =====");
             System.out.println(color);
         } catch (SQLException e) {
@@ -87,7 +86,7 @@ public class ColorsView {
         String colorName = scanner.nextLine();
 
         try {
-            Colors color = colorManager.getColorByName(colorName);
+            Colors color = colorService.getColorByName(colorName);
             System.out.println("\n===== 색상 정보 =====");
             System.out.println(color);
         } catch (SQLException e) {
@@ -104,7 +103,7 @@ public class ColorsView {
 
         Colors color = new Colors(colorname);
         try {
-            boolean success = colorManager.addColor(color);
+            boolean success = colorService.addColor(color);
             if (success) {
                 System.out.println("새로운 색상이 성공적으로 등록되었습니다.");
             } else {

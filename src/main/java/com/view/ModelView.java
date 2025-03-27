@@ -1,8 +1,7 @@
 package com.view;
 
-import com.model.Colors;
 import com.model.Model;
-import com.service.ModelManager;
+import com.service.ModelService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,12 +9,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ModelView {
-    private final ModelManager modelManager;
+    private final ModelService modelService;
     private final Scanner scanner;
 
     // 생성자
     public ModelView(Connection connection) {
-        this.modelManager = new ModelManager(connection);
+        this.modelService = new ModelService(connection);
         this.scanner = new Scanner(System.in);
     }
 
@@ -53,7 +52,7 @@ public class ModelView {
     // 전체 모델 조회
     private void getAllModels() {
         try {
-            List<Model> models = modelManager.getAllModels();
+            List<Model> models = modelService.getAllModels();
 
             if (models.isEmpty()) {
                 System.out.println("등록된 모델이 없습니다.");
@@ -73,7 +72,7 @@ public class ModelView {
         scanner.nextLine(); // 개행 문자 처리
 
         try {
-            Model model = modelManager.getModelById(modelId);
+            Model model = modelService.getModelById(modelId);
             System.out.println("\n===== 모델 정보 =====");
             System.out.println(model);
         } catch (SQLException e) {
@@ -89,7 +88,7 @@ public class ModelView {
         String modelname = scanner.nextLine();
 
         try {
-            Model model = modelManager.getModelByName(modelname);
+            Model model = modelService.getModelByName(modelname);
             System.out.println("\n===== 모델 정보 =====");
             System.out.println(model);
         } catch (SQLException e) {
@@ -117,7 +116,7 @@ public class ModelView {
 
         Model model = new Model(brandname, modelname, price, description);
         try {
-            boolean success = modelManager.addModel(model);
+            boolean success = modelService.addModel(model);
             if (success) {
                 System.out.println("새로운 신발 모델이 성공적으로 등록되었습니다.");
             } else {
@@ -138,7 +137,7 @@ public class ModelView {
         Model newModel = new Model();
         // 모델 이름으로 모델 검색
         try {
-            Model model = modelManager.getModelByName(modelname);
+            Model model = modelService.getModelByName(modelname);
             newModel.setId(model.getId());
             System.out.println("\n===== 모델 변경 =====");
 
@@ -179,7 +178,7 @@ public class ModelView {
 
 
         try {
-            boolean success = modelManager.updateModel(newModel);
+            boolean success = modelService.updateModel(newModel);
             if (success) {
                 System.out.println("신발 모델 정보가 성공적으로 수정되었습니다.");
             } else {
