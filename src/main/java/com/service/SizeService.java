@@ -1,8 +1,18 @@
 package com.service;
 
+import com.dao.ModelDao;
+import com.dao.SizeDao;
 import com.model.Size;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.Connection;
 
 public class SizeService {
+    private static Logger log = LoggerFactory.getLogger(SizeService.class);
+    private final SizeDao sizeDao;
+    private Connection connection;
+
     private final Size[] sizes;
     private static final int BASE_SIZE = 220;
     private static final int INCREMENT = 10;
@@ -11,11 +21,6 @@ public class SizeService {
     public SizeService() {
         sizes = new Size[SIZE_COUNT];
         for (int i = 0; i < SIZE_COUNT; i++) {
-            // Size = 220 + i*10
-            // i=0: 220 + 0*10 = 220
-            // i=1: 220 + 1*10 = 230
-            // i=2: 220 + 2*10 = 240
-            // and so on...
             int sizeDetail = BASE_SIZE + (i * INCREMENT);
             sizes[i] = new Size(i + 1, sizeDetail);
         }

@@ -59,7 +59,7 @@ public class ColorsView {
                 colors.forEach(color -> System.out.println(color));
             }
         } catch (SQLException e) {
-            System.out.println("모델 목록을 조회하는 중 오류가 발생했습니다.");
+            System.out.println("색상 목록을 조회하는 중 오류가 발생했습니다.");
         }
     }
 
