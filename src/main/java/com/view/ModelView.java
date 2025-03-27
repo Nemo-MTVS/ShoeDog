@@ -1,7 +1,7 @@
 package com.view;
 
 import com.model.Model;
-import com.service.ModelManager;
+import com.service.ModelService;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ModelView {
-    private final ModelManager modelManager;
+    private final ModelService modelService;
     private final Scanner scanner;
 
     // 생성자
     public ModelView(Connection connection) {
-        this.modelManager = new ModelManager(connection);
+        this.modelService = new ModelService(connection);
         this.scanner = new Scanner(System.in);
     }
 
@@ -48,7 +48,7 @@ public class ModelView {
     // 전체 모델 조회
     private void getAllModels() {
         try {
-            List<Model> models = modelManager.getAllModels();
+            List<Model> models = modelService.getAllModels();
 
             if (models.isEmpty()) {
                 System.out.println("등록된 모델이 없습니다.");

@@ -1,71 +1,63 @@
 package com.model;
 
 public class Stock {
-    private int shoe_id;
-    private int model_id;
-    private int color;
-    private int size;
-    private int stock;
+    private int stockId;
+    private int modelId;
+    private int colorId;
+    private int sizeId;
+    private int quantity;
 
-    public Stock(int shoe_id, int model_id, int color, int size, int stock) {
-        this.shoe_id = shoe_id;
-        this.model_id = model_id;
-        this.color = color;
-        this.size = size;
-        this.stock = stock;
+    public Stock(int stockId, int modelId, int colorId, int sizeId, int quantity) {
+        this.stockId = stockId;
+        this.modelId = modelId;
+        this.colorId = colorId;
+        this.sizeId = sizeId;
+        this.quantity = quantity;
     }
 
-    public int getShoe_id() {
-        return shoe_id;
+    public int getId() {
+        return stockId;
     }
 
-    public void setShoe_id(int shoe_id) {
-        this.shoe_id = shoe_id;
+    public void setId(int stockId) {
+        this.stockId = stockId;
     }
 
-    public int getModel_id() {
-        return model_id;
+    public int getModelId() {
+        return modelId;
     }
 
-    public void setModel_id(int model_id) {
-        this.model_id = model_id;
+    public void setModelId(int modelId) {
+        this.modelId = modelId;
     }
 
-    public int getColor() {
-        return color;
+    public int getColorId() {
+        return colorId;
     }
 
-    public void setColor(int color) {
-        this.color = color;
+    public void setColorId(int colorId) {
+        this.colorId = colorId;
     }
 
-    public int getSize() {
-        return size;
+    public int getSizeId() {
+        return sizeId;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setSizeId(int sizeId) {
+        this.sizeId = sizeId;
     }
 
-    public int getStock() {
-        return stock;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
     public String toString() {
-        return "Stock{" +
-                "shoe_id=" + shoe_id +
-                ", model_id=" + model_id +
-                ", color=" + color +
-                ", size=" + size +
-                ", stock=" + stock +
-                '}';
-    }
-
-    public void add(Stock stock) {
+        return String.format("Stock{id=%d, model=%d, color=%d, size=%d, quantity=%d}",
+                stockId, modelId, colorId, sizeId, quantity);
     }
 }

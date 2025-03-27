@@ -3,6 +3,7 @@ package com;
 import com.config.JDBCConnection;
 import com.view.ColorsView;
 import com.view.ModelView;
+import com.view.StockView;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class Application {
             System.out.println("\n===== 신발 재고 관리 시스템 =====");
             System.out.println("1. 모델(Model) 관리");
             System.out.println("2. 색상(Color) 관리");
-            System.out.println("3. 사용자(User) 관리");
+            System.out.println("3. 재고(Stock) 관리");
             System.out.println("0. 종료");
             System.out.print("선택: ");
 
@@ -29,7 +30,7 @@ public class Application {
             switch (choice) {
                 case 1 -> startModelManagement(connection);
                 case 2 -> startColorManagement(connection);
-                //case 3 -> startUserManagement(connection);
+                case 3 -> startStockManagement(connection);
                 case 0 -> {
                     connection.close();
                     System.out.println("🚀 프로그램을 종료합니다.");
@@ -53,4 +54,9 @@ public class Application {
         colorsView.showMenu();
     }
 
+    // 재고 관리
+    private static void startStockManagement(Connection connection) {
+        StockView stockView = new StockView(connection);
+        stockView.showMenu();
+    }
 }

@@ -1,15 +1,15 @@
 package com.service;
 
-import com.model.Sizes;
+import com.model.Size;
 
-public class SizeManager {
-    private final Sizes[] sizes;
+public class SizeService {
+    private final Size[] sizes;
     private static final int BASE_SIZE = 220;
     private static final int INCREMENT = 10;
     private static final int SIZE_COUNT = 9;  // 220 to 300 with 10-unit increments
 
-    public SizeManager() {
-        sizes = new Sizes[SIZE_COUNT];
+    public SizeService() {
+        sizes = new Size[SIZE_COUNT];
         for (int i = 0; i < SIZE_COUNT; i++) {
             // Size = 220 + i*10
             // i=0: 220 + 0*10 = 220
@@ -17,19 +17,19 @@ public class SizeManager {
             // i=2: 220 + 2*10 = 240
             // and so on...
             int sizeDetail = BASE_SIZE + (i * INCREMENT);
-            sizes[i] = new Sizes(i + 1, sizeDetail);
+            sizes[i] = new Size(i + 1, sizeDetail);
         }
     }
 
     // Read
-    public Sizes getSizeById(int sizeId) {
+    public Size getSizeById(int sizeId) {
         if (sizeId < 1 || sizeId > SIZE_COUNT) {
             return null;
         }
         return sizes[sizeId - 1];
     }
 
-    public Sizes getSizeByDetail(int sizeDetail) {
+    public Size getSizeByDetail(int sizeDetail) {
         // Check if sizeDetail follows the pattern: 220 + i*10
         if ((sizeDetail - BASE_SIZE) % INCREMENT != 0) {
             return null;
@@ -41,11 +41,11 @@ public class SizeManager {
         return sizes[i];
     }
 
-    public Sizes[] getAllSizes() {
+    public Size[] getAllSizes() {
         return sizes.clone();
     }
 
-    public Sizes[] getSizesInRange(int minSize, int maxSize) {
+    public Size[] getSizesInRange(int minSize, int maxSize) {
         // Convert min and max to indices
         int minIndex = (minSize - BASE_SIZE) / INCREMENT;
         int maxIndex = (maxSize - BASE_SIZE) / INCREMENT;
@@ -54,10 +54,10 @@ public class SizeManager {
         if (minIndex < 0) minIndex = 0;
         if (maxIndex >= SIZE_COUNT) maxIndex = SIZE_COUNT - 1;
         if (minIndex > maxIndex) {
-            return new Sizes[0];
+            return new Size[0];
         }
         
-        Sizes[] result = new Sizes[maxIndex - minIndex + 1];
+        Size[] result = new Size[maxIndex - minIndex + 1];
         System.arraycopy(sizes, minIndex, result, 0, result.length);
         return result;
     }
@@ -67,7 +67,7 @@ public class SizeManager {
         if (!isValidSize(newSizeDetail)) {
             return false;
         }
-        Sizes size = getSizeById(sizeId);
+        Size size = getSizeById(sizeId);
         if (size != null) {
             size.setSize_detail(newSizeDetail);
             return true;

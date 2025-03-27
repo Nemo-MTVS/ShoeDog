@@ -1,10 +1,10 @@
 package com.model;
 
-public class Sizes {
+public class Size {
     private int size_id;
     private int size_detail;
 
-    public Sizes(int size_id, int size_detail) {
+    public Size(int size_id, int size_detail) {
         this.size_id = size_id;
         this.size_detail = size_detail;
     }

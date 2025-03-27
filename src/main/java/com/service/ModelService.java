@@ -1,6 +1,6 @@
 package com.service;
 
-import com.dao.ShoeModelDao;
+import com.dao.ModelDao;
 import com.model.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,16 +9,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ModelManager {
+public class ModelService {
 
-    private static final Logger log = LoggerFactory.getLogger(ModelManager.class);
-    private final ShoeModelDao modelDao;
+    private static final Logger log = LoggerFactory.getLogger(ModelService.class);
+    private final ModelDao modelDao;
     private final Connection connection;
 
     // 생성자
-    public ModelManager(Connection connection) {
+    public ModelService(Connection connection) {
         this.connection = connection;
-        this.modelDao = new ShoeModelDao(connection);
+        this.modelDao = new ModelDao(connection);
     }
 
     // 모든 사용자 조회

@@ -9,9 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoeModelDao {
+public class ModelDao {
     private final Connection connection;
-    public ShoeModelDao(Connection connection) {
+    public ModelDao(Connection connection) {
         this.connection = connection;
     }
 
