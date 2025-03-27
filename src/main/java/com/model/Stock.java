@@ -65,4 +65,7 @@ public class Stock {
                 ", stock=" + stock +
                 '}';
     }
+
+    public void add(Stock stock) {
+    }
 }
