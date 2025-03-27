@@ -38,10 +38,9 @@ public class Application {
                 }
                 default -> System.out.println("❌ 잘못된 입력입니다. 다시 선택하세요.");
             }
-
-
         }
     }
+
     // 모델 관리
     private static void startModelManagement(Connection connection) {
         ModelView modelView = new ModelView(connection);

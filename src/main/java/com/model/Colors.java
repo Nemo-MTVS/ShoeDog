@@ -17,6 +17,11 @@ public class Colors {
         this.color_name = color_name;
     }
 
+    public Colors(String color_name) {
+        this.color_name = color_name;
+    }
+
+
     public int getColor_id() {
         return color_id;
     }
