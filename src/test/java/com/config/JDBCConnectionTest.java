@@ -1,5 +1,6 @@
 package com.config;
 
+import com.config.JDBCConnection;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
