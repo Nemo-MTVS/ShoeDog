@@ -31,11 +31,11 @@ public class StocksDao {
         ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 stocks.add(new Stock(
-                    resultSet.getInt("id"),
-                    resultSet.getInt("model_id"),
-                    resultSet.getInt("color_id"),
-                    resultSet.getInt("size_id"),
-                    resultSet.getInt("stock")
+                        resultSet.getInt("id"),
+                        resultSet.getInt("model_id"),
+                        resultSet.getInt("color_id"),
+                        resultSet.getInt("size_id"),
+                        resultSet.getInt("stock")
                 ));
             }
 
@@ -57,8 +57,8 @@ public class StocksDao {
                     stock = new Stock(
                             resultSet.getInt("shoe_id"),
                             resultSet.getInt("model_id"),
-                            resultSet.getInt("color"),
-                            resultSet.getInt("size"),
+                            resultSet.getInt("color_id"),
+                            resultSet.getInt("size_id"),
                             resultSet.getInt("stock")
                     );
                 }
