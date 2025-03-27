@@ -1,4 +1,84 @@
 package com.view;
 
+import com.model.Colors;
+import com.service.ColorManager;
+
+import java.awt.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Scanner;
+
 public class ColorsView {
+    private final ColorManager colorManager;
+    private final Scanner scanner;
+
+    // 생성자
+    public ColorsView(Connection connection) {
+        this.colorManager = new ColorManager(connection);
+        this.scanner = new Scanner(System.in);
+    }
+
+    // 사용자에게 crud 메뉴 제공
+    public void showMenu() {
+        while (true) {
+            System.out.println("\n===== 색상 관리 시스템 =====");
+            System.out.println("1. 전체 색상 조회");
+            System.out.println("2. ID로 특정 색상 조회");
+            System.out.println("3.  등록");
+            System.out.println("4.  수정");
+            System.out.println("5.  삭제");
+            System.out.println("0.  뒤로가기");
+            System.out.print("선택하세요: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // 개행 문자 처리
+
+            switch (choice) {
+                case 1 -> getAllColors();
+                case 2 -> getColorById();
+                case 0 -> {
+                    System.out.println("프로그램을 종료합니다.");
+                    return;
+                }
+                default -> System.out.println("잘못된 입력입니다. 다시 선택하세요.");
+            }
+        }
+    }
+
+
+    // 전체 색상 조회
+    private void getAllColors() {
+        try {
+            List<Colors> colors = colorManager.getAllColors();
+
+            if (colors.isEmpty()) {
+                System.out.println("등록된 색상이 없습니다.");
+            } else {
+                System.out.println("\n===== 전체 색상 목록 =====");
+                colors.forEach(color -> System.out.println(color));
+            }
+        } catch (SQLException e) {
+            System.out.println("모델 목록을 조회하는 중 오류가 발생했습니다.");
+        }
+    }
+
+    // ID 로 색상 조회
+    private void getColorById() {
+        System.out.print("조회할 색상 ID를 입력하세요: ");
+        int userId = scanner.nextInt();
+        scanner.nextLine(); // 개행 문자 처리
+
+        try {
+            Colors color = colorManager.getColorById(userId);
+            System.out.println("\n===== 색상 정보 =====");
+            System.out.println(color);
+        } catch (SQLException e) {
+            System.out.println("사용자 조회 중 오류가 발생했습니다.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
+
+

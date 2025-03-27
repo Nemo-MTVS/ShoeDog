@@ -4,6 +4,14 @@ public class Colors {
     private int color_id;
     private String color_name;
 
+    @Override
+    public String toString() {
+        return "Colors{" +
+                "color_id=" + color_id +
+                ", color_name='" + color_name + '\'' +
+                '}';
+    }
+
     public Colors(int color_id, String color_name) {
         this.color_id = color_id;
         this.color_name = color_name;
