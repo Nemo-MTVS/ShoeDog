@@ -1,5 +1,5 @@
 CREATE TABLE `stock` (
-  `shoe_id` integer PRIMARY KEY AUTO_INCREMENT,
+  `id` integer PRIMARY KEY AUTO_INCREMENT,
   `model_id` integer NOT NULL,
   `color_id` integer NOT NULL,
   `size_id` integer NOT NULL,
@@ -20,12 +20,12 @@ CREATE TABLE `color` (
 );
 
 CREATE TABLE `sizes` (
-  `id` integer PRIMARY KEY AUTO_INCREMENT,
+  `size_id` integer PRIMARY KEY AUTO_INCREMENT,
   `size` integer UNIQUE NOT NULL
 );
 
-ALTER TABLE `stock` ADD FOREIGN KEY (`model_id`) REFERENCES `model` (`id`);
+ALTER TABLE `stock` ADD FOREIGN KEY (`model_id`) REFERENCES `model` (`model_id`);
 
-ALTER TABLE `stock` ADD FOREIGN KEY (`size`) REFERENCES `sizes` (`id`);
+ALTER TABLE `stock` ADD FOREIGN KEY (`size_id`) REFERENCES `sizes` (`size_id`);
 
-ALTER TABLE `stock` ADD FOREIGN KEY (`color`) REFERENCES `color` (`id`);
+ALTER TABLE `stock` ADD FOREIGN KEY (`color_id`) REFERENCES `color` (`color_ id`);
