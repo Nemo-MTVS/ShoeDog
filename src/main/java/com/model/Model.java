@@ -15,6 +15,17 @@ public class Model {
         this.description = description;
     }
 
+    public Model(String modelname, String brandname, int listprice, String description) {
+        this.modelname = modelname;
+        this.brandname = brandname;
+        this.listprice = listprice;
+        this.description = description;
+    }
+
+    public Model(){
+
+    }
+
     public int getId() {
         return id;
     }

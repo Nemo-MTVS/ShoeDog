@@ -16,7 +16,7 @@ public class ColorsDao {
     // 모든 색상 조회
     public List<Colors> getAllColors() {
         List<Colors> colors = new ArrayList<>();
-        String query = "select * from color";
+        String query = "select * from color ORDER BY color_id ASC;";
 
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -33,13 +33,36 @@ public class ColorsDao {
         return colors;
     }
 
-    // 단일 색상 조회
+    // id로 특정 색상 조회
     public Colors getColorById(int colorId) {
         String query = "select * from color where color_id = ?";
         Colors color = null;
 
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, colorId);
+
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    color = new Colors(
+                            rs.getInt("color_id"),
+                            rs.getString("color")
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return color;
+    }
+
+    // 색상명으로 특정 색상 조회
+    public Colors getColorByName(String colorName) {
+        String query = "select * from color where color = ?";
+        Colors color = null;
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, colorName);
 
             try(ResultSet rs = ps.executeQuery()){
                 if(rs.next()){

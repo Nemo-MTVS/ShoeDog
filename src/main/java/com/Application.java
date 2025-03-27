@@ -19,7 +19,7 @@ public class Application {
             System.out.println("\n===== 신발 재고 관리 시스템 =====");
             System.out.println("1. 모델(Model) 관리");
             System.out.println("2. 색상(Color) 관리");
-            System.out.println("3. 사용자(User) 관리");
+            //System.out.println("3. 사용자(User) 관리");
             System.out.println("0. 종료");
             System.out.print("선택: ");
 
@@ -37,10 +37,9 @@ public class Application {
                 }
                 default -> System.out.println("❌ 잘못된 입력입니다. 다시 선택하세요.");
             }
-
-
         }
     }
+
     // 모델 관리
     private static void startModelManagement(Connection connection) {
         ModelView modelView = new ModelView(connection);

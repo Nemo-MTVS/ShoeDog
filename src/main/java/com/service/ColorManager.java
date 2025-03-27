@@ -33,11 +33,10 @@ public class ColorManager {
             log.error("색상 정보가 없거나 DB와 연결하는 과정에서 오류가 발생했습니다.");
             return null;
         }
-
         return colorsDao.getAllColors();
     }
 
-    // id로 단일 색상 조회
+    // id로 특정 색상 조회
     public Colors getColorById(int colorId) throws SQLException {
         Colors color = colorsDao.getColorById(colorId);
 
@@ -47,7 +46,28 @@ public class ColorManager {
         return color;
     }
 
+    // 색상명으로 특정 색상 조회
+    public Colors getColorByName(String colorName) throws SQLException {
+        Colors color = colorsDao.getColorByName(colorName);
 
+        if (color == null) {
+            throw new IllegalArgumentException("해당 색상명의 색상을 찾을 수 없습니다.");
+        }
+        return color;
+    }
+
+
+    // 색상 추가
+    public boolean addColor(Colors color) throws SQLException {
+        // 중복 검사
+        List<Colors> existingColors = getAllColors();
+        for (Colors c : existingColors) {
+            if (c.getColor_name().equals(color.getColor_name())) {
+                throw new IllegalArgumentException("이미 존재하는 색상입니다.");
+            }
+        }
+        return colorsDao.addColor(color);
+    }
 
 //
 //    private final List<Colors> colors = new ArrayList<>();
