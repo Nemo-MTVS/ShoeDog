@@ -21,7 +21,7 @@ public class ColorsView {
     // 사용자에게 crud 메뉴 제공
     public void showMenu() {
         while (true) {
-            System.out.println("\n===== 색상 관리 시스템 =====");
+            System.out.println("\n=====  홈  =>  색상 관리 시스템  =====");
             System.out.println("1. 전체 색상 조회");
             System.out.println("2. 단일 색상 조회 (ID)");
             System.out.println("3. 단일 색상 조회 (색상명)");

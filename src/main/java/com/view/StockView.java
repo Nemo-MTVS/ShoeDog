@@ -1,6 +1,8 @@
 package com.view;
 
+import com.model.Model;
 import com.model.Stock;
+import com.model.StockInfo;
 import com.service.ModelService;
 import com.service.StockService;
 import org.slf4j.Logger;
@@ -23,12 +25,10 @@ public class StockView {
 
     public void showMenu() {
         while (true) {
-            System.out.println("\n===== 재고 관리 시스템 =====");
+            System.out.println("\n=====  홈  =>  신발 재고 관리 시스템  =====");
             System.out.println("1. 전체 재고 조회");
             System.out.println("2. 재고 등록");
-            System.out.println("3. 재고 조회 (ID)");
-            System.out.println("4. 재고 수정");
-            
+            System.out.println("3. 항목별 재고 조회");
             System.out.println("0. 종료");
             System.out.print("선택하세요: ");
 
@@ -37,10 +37,9 @@ public class StockView {
 
             try {
                 switch (choice) {
-                    case 1 -> System.out.print(getAllStocks());
-                    case 2 -> addNewStock();
-                    case 3 -> System.out.print(getStockById());
-                    case 4 -> updateStockQuantity();
+                    case 1 -> getAllStocks();
+                    case 2 -> updateStockQuantity();
+                    case 3 -> getStockByItem();
                     case 0 -> {
                         System.out.println("프로그램을 종료합니다.");
                         return;
@@ -54,74 +53,91 @@ public class StockView {
         }
     }
 
-    private String getAllStocks() throws SQLException {
-        List<Stock> stocks = stockService.getAllStocks();
+    // 전체 재고 조회
+    private void getAllStocks() throws SQLException {
+        try {
+            List<StockInfo> stocks = stockService.getAllStocks();
 
-        if (stocks.isEmpty()) {
-            return "등록된 재고가 없습니다.";
-        } else {
-            StringBuilder sb = new StringBuilder("\n===== 전체 재고 목록 =====\n");
-            for (Stock stock : stocks) {
-                sb.append(stock.toString()).append("\n");
+            if (stocks.isEmpty()) {
+                System.out.println( "등록된 재고가 없습니다.");
+            } else {
+                System.out.println("\n===== 전체 재고 목록 =====");
+                stocks.forEach(stock -> {
+                    System.out.println(stock);
+                });
+
             }
-            return sb.toString();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("재고 목록을 조회하는 중 오류가 발생했습니다.");
         }
     }
 
-    private String getStockById() throws SQLException {
-        System.out.print("\n조회할 재고 ID를 입력하세요: ");
-        int stockId = scanner.nextInt();
-        
-        Stock stock = stockService.getStockById(stockId);
-        
-        if (stock != null) {
-            return String.format("\n===== 재고 정보 =====\n%s\n", stock);
+    // 항목별 재고 조회
+    private void getStockByItem() throws SQLException {
+        String modelname = getValidModelName();
+        String color = getColorInput();
+        int size = getSizeInput();
+
+        StockInfo newStock = new StockInfo(modelname, color, size);
+        StockInfo existStock = stockService.isStockExist(newStock);
+
+        if (existStock == null) {
+            System.out.println("현재 재고 수량은 0 입니다.");
         } else {
-            return "해당 ID의 재고를 찾을 수 없습니다.\n";
+            System.out.println("현재 재고 수량은 " + existStock.getQuantity() + " 입니다.");
         }
     }
 
-    private void addNewStock() throws SQLException {
-        System.out.println("\n===== 새 재고 등록 =====");
-        
+    // 재고 등록
+    private void updateStockQuantity() throws SQLException {
+        System.out.println("\n===== 재고 등록 =====");
+
+        String modelname = getValidModelName();
+        String color = getColorInput();
+        int size = getSizeInput();
+
+        StockInfo newStock = new StockInfo(modelname, color, size);
+        StockInfo existStock = stockService.isStockExist(newStock);
+
+        System.out.print("변경할 재고 수량 : ");
+        int quantity = scanner.nextInt();
+        newStock.setQuantity(quantity);
+
+        if (existStock == null) {
+            System.out.println("현재 재고 수량은 0 입니다.");
+            stockService.addStock(newStock);
+            System.out.println("재고가 성공적으로 등록되었습니다.");
+        } else {
+            System.out.println("현재 재고 수량은 " + existStock.getQuantity() + " 입니다.");
+            stockService.updateStockQuantity(newStock);
+            System.out.println("재고가 성공적으로 변경되었습니다.");
+        }
+
+    }
+
+    // 모델명 입력과 유효성 검사
+    private String getValidModelName() throws SQLException {
         System.out.print("모델 명 : ");
         String modelname = scanner.nextLine();
-        
-        System.out.print("색상 : ");
-        String color = scanner.nextLine();
-        
-        System.out.print("사이즈 : ");
-        int sizeId = scanner.nextInt();
-        
-        System.out.print("재고 수량 : ");
-        int quantity = scanner.nextInt();
-        
-        Stock newStock = new Stock(0, modelId, colorId, sizeId, quantity);
-        
-        stockService.addStock(newStock);
-        System.out.println("재고가 성공적으로 등록되었습니다.");
+        while (!stockService.isModelExist(modelname)) {
+            System.out.print("존재하지 않는 모델입니다. \n올바른 모델명을 다시 입력해 주세요\n");
+            System.out.print("모델 명 : ");
+            modelname = scanner.nextLine();
+        }
+        return modelname;
     }
 
-    private void updateStockQuantity() throws SQLException {
-        System.out.print("\n수정할 재고 ID를 입력하세요: ");
-        int stockId = scanner.nextInt();
-        
-        Stock existingStock = stockService.getStockById(stockId);
-        if (existingStock == null) {
-            System.out.println("해당 ID의 재고를 찾을 수 없습니다.");
-            return;
-        }
+    // 색상 입력
+    private String getColorInput() {
+        System.out.print("색상 : ");
+        return scanner.nextLine();
+    }
 
-        System.out.println("현재 재고 정보:");
-        System.out.println(existingStock);
-        
-        System.out.print("\n새로운 재고 수량을 입력하세요: ");
-        int newQuantity = scanner.nextInt();
-        
-        if (stockService.updateStockQuantity(stockId, newQuantity)) {
-            System.out.println("재고가 성공적으로 수정되었습니다.");
-        } else {
-            System.out.println("재고 수정에 실패했습니다.");
-        }
+    // 사이즈 입력
+    private int getSizeInput() {
+        System.out.print("사이즈 : ");
+        return scanner.nextInt();
     }
 }
+

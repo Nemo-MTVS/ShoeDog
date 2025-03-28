@@ -21,7 +21,7 @@ public class ModelService {
         this.modelDao = new ModelDao(connection);
     }
 
-    // 모든 사용자 조회
+    // 모든 모델 조회
     public List<Model> getAllModels() throws SQLException {
         List<Model> models = modelDao.getAllModels();
 
@@ -71,8 +71,6 @@ public class ModelService {
         if (!result) {
             throw new SQLException("수정하는 과정에서 오류가 발생되었습니다.");
         }
-
-        // 3️⃣ 업데이트 수행
         return result;
     }
 

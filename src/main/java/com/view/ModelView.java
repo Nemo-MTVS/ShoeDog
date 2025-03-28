@@ -21,12 +21,12 @@ public class ModelView {
     // 사용자에게 crud 메뉴 제공
     public void showMenu() {
         while (true) {
-            System.out.println("\n===== 사용자 관리 시스템 =====");
-            System.out.println("1. 전체 모델 조회");
+            System.out.println("\n=====  홈  =>  신발 모델 관리 시스템  =====");
+            System.out.println("1. 등록된 전체 모델 조회");
             System.out.println("2. 단일 모델 조회 (ID)");
             System.out.println("3. 단일 모델 조회 (모델명)");
             System.out.println("4. 새로운 신발 모델 등록");
-            System.out.println("5. 모델 정보 수정");
+            System.out.println("5. 신발 모델 정보 수정");
             System.out.println("0. 뒤로가기");
             System.out.print("선택하세요: ");
 

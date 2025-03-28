@@ -29,3 +29,4 @@ ALTER TABLE `stock` ADD FOREIGN KEY (`model_id`) REFERENCES `model` (`model_id`)
 ALTER TABLE `stock` ADD FOREIGN KEY (`size_id`) REFERENCES `size` (`size_id`);
 
 ALTER TABLE `stock` ADD FOREIGN KEY (`color_id`) REFERENCES `color` (`color_id`);
+
