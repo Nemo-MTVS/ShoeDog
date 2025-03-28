@@ -19,8 +19,8 @@ public class StockService {
 
     public void addStock(Stock stock) throws SQLException {
         log.info("Adding new stock: {}", stock);
-        if (!isValidSize(stock.getSizeId())) {
-            throw new IllegalArgumentException("Invalid shoe size. Must be from 220 to 300" );
+        if (!isValidSize(stock.getSize())) {
+            throw new IllegalArgumentException("Shoe Size: 220 to 300 by 10" );
         }
         stockDao.insertStock(stock);
     }
@@ -54,8 +54,8 @@ public class StockService {
         log.info("Updating stock details: {}", updatedStock);
         Stock existingStock = getStockById(updatedStock.getId());
         if (existingStock != null) {
-            if (!isValidSize(updatedStock.getSizeId())) {
-                throw new IllegalArgumentException("Invalid shoe size. Must be from 220 to 300");
+            if (!isValidSize(updatedStock.getSize())) {
+                throw new IllegalArgumentException("Shoe Size: 220 to 300 by 10");
             }
             return stockDao.updateStock(updatedStock);
         }
@@ -72,17 +72,5 @@ public class StockService {
         return size >= MIN_SIZE && size <= MAX_SIZE && (size - MIN_SIZE) % SIZE_INCREMENT == 0;
     }
 
-    public int getSizeId(int size) {
-        if (!isValidSize(size)) {
-            return -1;
-        }
-        return (size - MIN_SIZE) / SIZE_INCREMENT;
-    }
 
-    public int getSizeFromId(int id) {
-        if (id < 0 || id > (MAX_SIZE - MIN_SIZE) / SIZE_INCREMENT) {
-            return -1;
-        }
-        return MIN_SIZE + (id * SIZE_INCREMENT);
-    }
 }

@@ -17,12 +17,12 @@ public class StockDao {
     }
 
     public void insertStock(Stock stock) throws SQLException {
-        String sql = "INSERT INTO stock (model_id, color_id, size_id, quantity) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO stock (model_id, color_id, size, quantity) VALUES (?, ?, ?, ?)";
         
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, stock.getModelId());
             ps.setInt(2, stock.getColorId());
-            ps.setInt(3, stock.getSizeId());
+            ps.setInt(3, stock.getSize());
             ps.setInt(4, stock.getQuantity());
             ps.executeUpdate();
         }
@@ -76,7 +76,7 @@ public class StockDao {
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, stock.getModelId());
             ps.setInt(2, stock.getColorId());
-            ps.setInt(3, stock.getSizeId());
+            ps.setInt(3, stock.getSize());
             ps.setInt(4, stock.getQuantity());
             ps.setInt(5, stock.getId());
             
@@ -99,7 +99,7 @@ public class StockDao {
             rs.getInt("id"),
             rs.getInt("model_id"),
             rs.getInt("color_id"),
-            rs.getInt("size_id"),
+            rs.getInt("size"),
             rs.getInt("quantity")
         );
     }

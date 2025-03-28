@@ -4,14 +4,14 @@ public class Stock {
     private int stockId;
     private int modelId;
     private int colorId;
-    private int sizeId;
+    private int size;
     private int quantity;
 
-    public Stock(int stockId, int modelId, int colorId, int sizeId, int quantity) {
+    public Stock(int stockId, int modelId, int colorId, int size, int quantity) {
         this.stockId = stockId;
         this.modelId = modelId;
         this.colorId = colorId;
-        this.sizeId = sizeId;
+        this.size = size;
         this.quantity = quantity;
     }
 
@@ -39,12 +39,12 @@ public class Stock {
         this.colorId = colorId;
     }
 
-    public int getSizeId() {
-        return sizeId;
+    public int getSize() {
+        return size;
     }
 
-    public void setSizeId(int sizeId) {
-        this.sizeId = sizeId;
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public int getQuantity() {
@@ -58,6 +58,6 @@ public class Stock {
     @Override
     public String toString() {
         return String.format("Stock{id=%d, model=%d, color=%d, size=%d, quantity=%d}",
-                stockId, modelId, colorId, sizeId, quantity);
+                stockId, modelId, colorId, size, quantity);
     }
 }
