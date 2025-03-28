@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queries>
+    <query id="getAllColors">
+        SELECT
+        *
+        FROM color
+        ORDER BY color_id ASC;
+    </query>
+
+    <query id="getAllModels">
+        SELECT
+        *
+        FROM model
+        ORDER BY model_id ASC;
+    </query>
+
+    <query id="getAllStocks">
+        SELECT
+        *
+        FROM stock
+    </query>
+
+    <query id="getColorById">
+        SELECT
+        *
+        FROM color
+        WHERE color_id = ?
+    </query>
+
+    <query id="getModelById">
+        SELECT
+        *
+        FROM model
+        WHERE model_id = ?
+    </query>
+
+    <query id="getStockById">
+        SELECT
+        *
+        FROM stock
+        WHERE id = ?
+    </query>
+
+    <query id = "getColorByName">
+        SELECT
+        *
+        FROM color
+        WHERE color = ?
+    </query>
+
+    <query id = "getModelByName">
+        SELECT
+        *
+        FROM model
+        WHERE modelname = ?
+    </query>
+
+    <query id = "getModelByModelId">
+        SELECT
+        *
+        FROM stock
+        WHERE model_id = ?
+    </query>
+
+    <query id="addColor">
+        INSERT INTO color (color)
+        VALUES (?)
+    </query>
+
+    <query id="addModel">
+        INSERT INTO model (modelname, brandname, listprice, description)
+        VALUES (?, ?, ?, ?)
+    </query>
+
+    <query id="addStock">
+        INSERT INTO stock (model_id, color_id, size, quantity)
+        VALUES (?, ?, ?, ?)
+    </query>
+
+
+    <query id="updateModel">
+        UPDATE model SET modelname = ?, brandname = ?, listprice = ?, description = ? WHERE model_id = ?
+    </query>
+
+    <query id="updateStock">
+        UPDATE stock SET model_id = ?, color_id = ?, size = ?, quantity = ? WHERE id = ?
+    </query>
+
+    <query id="updateStockQuantity">
+        UPDATE stock SET quantity = ? WHERE id = ?
+    </query>
+
+</queries>

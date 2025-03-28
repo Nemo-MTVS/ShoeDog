@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.model.Stock;
+import com.util.QueryUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ public class StockDao {
     }
 
     public void insertStock(Stock stock) throws SQLException {
-        String sql = "INSERT INTO stock (model_id, color_id, size, quantity) VALUES (?, ?, ?, ?)";
+        String sql = QueryUtil.getQuery("addStock");
         
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, stock.getModelId());
@@ -30,7 +31,7 @@ public class StockDao {
 
     public List<Stock> getAllStocks() throws SQLException {
         List<Stock> stocks = new ArrayList<>();
-        String sql = "SELECT * FROM stock";
+        String sql = QueryUtil.getQuery("getAllStocks");
 
         try (PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -42,7 +43,7 @@ public class StockDao {
     }
 
     public Stock getStockById(int id) throws SQLException {
-        String sql = "SELECT * FROM stock WHERE id = ?";
+        String sql = QueryUtil.getQuery("getStockById");
         
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -57,7 +58,7 @@ public class StockDao {
 
     public List<Stock> getStocksByModelId(int modelId) throws SQLException {
         List<Stock> stocks = new ArrayList<>();
-        String sql = "SELECT * FROM stock WHERE model_id = ?";
+        String sql = QueryUtil.getQuery("getStocksByModelId");
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, modelId);
@@ -71,7 +72,7 @@ public class StockDao {
     }
 
     public boolean updateStock(Stock stock) throws SQLException {
-        String sql = "UPDATE stock SET model_id = ?, color_id = ?, size_id = ?, quantity = ? WHERE id = ?";
+        String sql = QueryUtil.getQuery("updateStock");
         
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, stock.getModelId());
@@ -85,7 +86,7 @@ public class StockDao {
     }
 
     public boolean updateStockQuantity(int id, int newQuantity) throws SQLException {
-        String sql = "UPDATE stock SET quantity = ? WHERE id = ?";
+        String sql = QueryUtil.getQuery("updateStockQuantity");
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, newQuantity);

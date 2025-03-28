@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.model.Model;
+import com.util.QueryUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class ModelDao {
 
     public List<Model> getAllModels() {
         List<Model> models = new ArrayList<>();
-        String query = "select * from model";
+        String query = QueryUtil.getQuery("getAllModels");
 
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -35,7 +36,7 @@ public class ModelDao {
     }
     // ID로 특정 모델 조회
     public Model getModelById(int modelId) {
-        String query = "select * from model where model_id = ?";
+        String query = QueryUtil.getQuery("getModelById");
         Model model = null;
 
         try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -60,7 +61,7 @@ public class ModelDao {
 
     // 모델 이름으로 특정 모델 조회
     public Model getModelByName(String modelname) {
-        String query = "select * from model where modelname = ?";
+        String query = QueryUtil.getQuery("getModelByName");
         Model model = null;
 
         try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -85,7 +86,7 @@ public class ModelDao {
 
     // 모델 추가
     public boolean addModel(Model model) {
-        String query = "INSERT INTO model (modelname, brandname, listprice, description) VALUES (?, ?, ?, ?)";
+        String query = QueryUtil.getQuery("addModel");
 
         try (PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, model.getModelname());
@@ -104,7 +105,7 @@ public class ModelDao {
 
     // 모델 수정
     public boolean updateModel(Model model) {
-        String query = "UPDATE model SET modelname = ?, brandname = ?, listprice = ?, description = ? WHERE model_id = ?";
+        String query = QueryUtil.getQuery("updateModel");
 
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, model.getModelname());

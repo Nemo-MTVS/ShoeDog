@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.model.Colors;
+import com.util.QueryUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class ColorsDao {
     // 모든 색상 조회
     public List<Colors> getAllColors() {
         List<Colors> colors = new ArrayList<>();
-        String query = "select * from color ORDER BY color_id ASC;";
+        String query = QueryUtil.getQuery("getAllColors");
 
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -35,7 +36,7 @@ public class ColorsDao {
 
     // id로 특정 색상 조회
     public Colors getColorById(int colorId) {
-        String query = "select * from color where color_id = ?";
+        String query = QueryUtil.getQuery("getColorById");
         Colors color = null;
 
         try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -58,7 +59,7 @@ public class ColorsDao {
 
     // 색상명으로 특정 색상 조회
     public Colors getColorByName(String colorName) {
-        String query = "select * from color where color = ?";
+        String query = QueryUtil.getQuery("getColorByName");
         Colors color = null;
 
         try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -81,7 +82,7 @@ public class ColorsDao {
 
     // 색상 추가
     public boolean addColor(Colors color) {
-        String query = "INSERT INTO color (color) VALUES (?)";
+        String query = QueryUtil.getQuery("addColor");
 
         try (PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, color.getColor_name());
