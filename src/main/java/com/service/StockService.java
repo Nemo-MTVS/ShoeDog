@@ -19,6 +19,9 @@ public class StockService {
 
     public void addStock(Stock stock) throws SQLException {
         log.info("Adding new stock: {}", stock);
+        if (!isValidSize(stock.getSizeId())) {
+            throw new IllegalArgumentException("Invalid shoe size. Must be from 220 to 300" );
+        }
         stockDao.insertStock(stock);
     }
 
@@ -51,9 +54,35 @@ public class StockService {
         log.info("Updating stock details: {}", updatedStock);
         Stock existingStock = getStockById(updatedStock.getId());
         if (existingStock != null) {
+            if (!isValidSize(updatedStock.getSizeId())) {
+                throw new IllegalArgumentException("Invalid shoe size. Must be from 220 to 300");
+            }
             return stockDao.updateStock(updatedStock);
         }
         log.warn("Stock not found with ID: {}", updatedStock.getId());
         return false;
+    }
+
+    // ============= Size Related Methods =============
+    private static final int MIN_SIZE = 220;
+    private static final int MAX_SIZE = 300;
+    private static final int SIZE_INCREMENT = 10;
+
+    private boolean isValidSize(int size) {
+        return size >= MIN_SIZE && size <= MAX_SIZE && (size - MIN_SIZE) % SIZE_INCREMENT == 0;
+    }
+
+    public int getSizeId(int size) {
+        if (!isValidSize(size)) {
+            return -1;
+        }
+        return (size - MIN_SIZE) / SIZE_INCREMENT;
+    }
+
+    public int getSizeFromId(int id) {
+        if (id < 0 || id > (MAX_SIZE - MIN_SIZE) / SIZE_INCREMENT) {
+            return -1;
+        }
+        return MIN_SIZE + (id * SIZE_INCREMENT);
     }
 }

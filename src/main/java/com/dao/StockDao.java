@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StockDao {
-    private Connection connection;
+    private final Connection connection;
 
     public StockDao(Connection connection) {
         this.connection = connection;
