@@ -52,6 +52,12 @@ public class ColorService {
         return color;
     }
 
+    public int getColorIdByName(String colorName) throws SQLException {
+        int colorId = 0;
+        Colors color = getColorByName(colorName);
+        return colorId = color.getColor_id();
+    }
+
 
     // 색상 추가
     public boolean addColor(Colors color) throws SQLException {
@@ -64,50 +70,4 @@ public class ColorService {
         }
         return colorsDao.addColor(color);
     }
-
-//
-//    private final List<Colors> colors = new ArrayList<>();
-//
-//    // Create
-//    public void addColor(Colors color) {
-//        colors.add(color);
-//    }
-//
-//    // Read
-//    public Colors getColorById(int colorId) {
-//        return colors.stream()
-//                .filter(color -> color.getColor_id() == colorId)
-//                .findFirst()
-//                .orElse(null);
-//    }
-//
-//    public Colors getColorByName(String colorName) {
-//        return colors.stream()
-//                .filter(color -> color.getColor_name().equalsIgnoreCase(colorName))
-//                .findFirst()
-//                .orElse(null);
-//    }
-//
-//    public List<Colors> getAllColors() {
-//        return new ArrayList<>(colors);
-//    }
-//
-//    // Update
-//    public boolean updateColorName(int colorId, String newName) {
-//        Colors color = getColorById(colorId);
-//        if (color != null) {
-//            color.setColor_name(newName);
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    // Delete
-//    public boolean removeColor(int colorId) {
-//        return colors.removeIf(color -> color.getColor_id() == colorId);
-//    }
-//
-//    public boolean removeColor(Colors color) {
-//        return colors.remove(color);
-//    }
-} 
+}

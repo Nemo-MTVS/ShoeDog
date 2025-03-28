@@ -30,9 +30,9 @@ public class StockService {
         return stockDao.getStockById(id);
     }
 
-    public List<Stock> getStockByModel(int modelId) throws SQLException {
-        log.info("Fetching stocks for model ID: {}", modelId);
-        return stockDao.getStocksByModelId(modelId);
+    public int getStockIdByModelIdColorSize(int modelId, int colorId, int size) throws SQLException {
+        log.info("Fetching stocks for model ID: {}, color ID: {}, size: {}", modelId, colorId, size);
+        return stockDao.getStockIdByModelIdColorSize(modelId, colorId, size);
     }
 
     public List<Stock> getAllStocks() throws SQLException {
@@ -68,7 +68,7 @@ public class StockService {
     private static final int MAX_SIZE = 300;
     private static final int SIZE_INCREMENT = 10;
 
-    private boolean isValidSize(int size) {
+    public static boolean isValidSize(int size) {
         return size >= MIN_SIZE && size <= MAX_SIZE && (size - MIN_SIZE) % SIZE_INCREMENT == 0;
     }
 

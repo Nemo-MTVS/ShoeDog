@@ -1,8 +1,12 @@
 package com.view;
 
 import com.model.Stock;
-import com.service.ModelService;
+import com.model.Model;
+import com.model.Colors;
+
 import com.service.StockService;
+import com.service.ModelService;
+import com.service.ColorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,10 +18,14 @@ import java.util.Scanner;
 public class StockView {
     private static final Logger log = LoggerFactory.getLogger(StockView.class);
     private final StockService stockService;
+    private final ModelService modelService;
+    private final ColorService colorService;
     private final Scanner scanner;
 
     public StockView(Connection connection) {
         this.stockService = new StockService(connection);
+        this.modelService = new ModelService(connection);
+        this.colorService = new ColorService(connection);
         this.scanner = new Scanner(System.in);
     }
 
@@ -85,16 +93,37 @@ public class StockView {
         System.out.println("\n===== 새 재고 등록 =====");
         
         System.out.print("모델 명 : ");
-        int modelId = scanner.nextInt();
-//        String modelname = scanner.nextLine();
-        
+        String modelname = scanner.nextLine();
+        int modelId = modelService.getModelIdByName(modelname);
+        if (modelId == 0) {
+            System.out.println("해당 모델을 찾을 수 없습니다.");
+            return;
+        }
+
         System.out.print("색상 : ");
-        int colorId = scanner.nextInt();
-//        String color = scanner.nextLine();
-        
+        String color = scanner.nextLine();
+        int colorId = colorService.getColorIdByName(color);
+        if (colorId == 0) {
+            System.out.println("해당 색상을 찾을 수 없습니다.");
+            return;
+        }
+
         System.out.print("사이즈 : ");
         int size = scanner.nextInt();
-        
+        if (!StockService.isValidSize(size)) {
+            System.out.println("유효하지 않은 사이즈입니다. 220부터 300까지 10씩 증가하는 사이즈만 가능합니다.");
+            return;
+        }
+
+        int stockId = stockService.getStockIdByModelIdColorSize(modelId, colorId, size);
+        if(stockId != 0) {
+            int quantity = stockService.getStockById(stockId).getQuantity();
+            System.out.println("현재 해당 재고는 " + quantity + " 보유 중입니다.");
+            return;
+        } else {
+            System.out.println("해당 재고는 최초로 등록됩니다.");
+        }
+
         System.out.print("재고 수량 : ");
         int quantity = scanner.nextInt();
         

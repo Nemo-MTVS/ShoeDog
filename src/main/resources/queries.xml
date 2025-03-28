@@ -41,6 +41,13 @@
         WHERE id = ?
     </query>
 
+    <query id="getStockIdByModelIdColorSize">
+        SELECT
+            id
+        FROM stock
+        WHERE model_id = ? AND color_id = ? AND size = ?
+    </query>
+
     <query id = "getColorByName">
         SELECT
         *

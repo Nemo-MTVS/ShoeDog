@@ -52,6 +52,12 @@ public class ModelService {
         return model;
     }
 
+    public int getModelIdByName(String modelname) throws SQLException {
+        int modelId = 0;
+        Model model = getModelByName(modelname);
+        return modelId = model.getId();
+    }
+
     // 모델 등록
     public boolean addModel(Model model) throws SQLException {
         // 중복 검사

@@ -56,19 +56,21 @@ public class StockDao {
         return null;
     }
 
-    public List<Stock> getStocksByModelId(int modelId) throws SQLException {
-        List<Stock> stocks = new ArrayList<>();
-        String sql = QueryUtil.getQuery("getStocksByModelId");
+    public int getStockIdByModelIdColorSize(int modelId, int colorId, int size) throws SQLException {
+        int stockId = 0;
+        String sql = QueryUtil.getQuery("getStockIdByModelIdColorSize");
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, modelId);
+            ps.setInt(2, colorId);
+            ps.setInt(3, size);
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    stocks.add(mapResultSetToStock(rs));
+                if (rs.next()) {
+                    stockId = rs.getInt("id");
                 }
             }
         }
-        return stocks;
+        return stockId;
     }
 
     public boolean updateStock(Stock stock) throws SQLException {
