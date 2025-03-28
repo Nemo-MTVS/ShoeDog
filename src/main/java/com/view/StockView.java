@@ -1,6 +1,7 @@
 package com.view;
 
 import com.model.Stock;
+import com.service.ModelService;
 import com.service.StockService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,16 +84,16 @@ public class StockView {
     private void addNewStock() throws SQLException {
         System.out.println("\n===== 새 재고 등록 =====");
         
-        System.out.print("모델 ID: ");
-        int modelId = scanner.nextInt();
+        System.out.print("모델 명 : ");
+        String modelname = scanner.nextLine();
         
-        System.out.print("색상 ID: ");
-        int colorId = scanner.nextInt();
+        System.out.print("색상 : ");
+        String color = scanner.nextLine();
         
-        System.out.print("사이즈 ID: ");
+        System.out.print("사이즈 : ");
         int sizeId = scanner.nextInt();
         
-        System.out.print("재고 수량: ");
+        System.out.print("재고 수량 : ");
         int quantity = scanner.nextInt();
         
         Stock newStock = new Stock(0, modelId, colorId, sizeId, quantity);
